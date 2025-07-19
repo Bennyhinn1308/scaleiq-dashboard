@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScaleIQ Digital Operations Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- External libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">ScaleIQ Dashboard</h1>
+            <div class="header-actions">
+                <button class="btn btn--outline btn--sm" id="exportBtn">Export Report</button>
+                <button class="btn btn--primary btn--sm" id="upgradeBtn">Upgrade to Premium</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="#overview" class="nav-link active" data-section="overview"><span class="nav-icon">📊</span> Overview</a></li>
+                <li><a href="#upload" class="nav-link" data-section="upload"><span class="nav-icon">📁</span> Data Upload</a></li>
+                <li><a href="#sales" class="nav-link" data-section="sales"><span class="nav-icon">💰</span> Sales Analytics</a></li>
+                <li><a href="#cashflow" class="nav-link" data-section="cashflow"><span class="nav-icon">💵</span> Cash Flow</a></li>
+                <li><a href="#inventory" class="nav-link" data-section="inventory"><span class="nav-icon">📦</span> Inventory</a></li>
+                <li><a href="#insights" class="nav-link" data-section="insights"><span class="nav-icon">🧠</span> Business Insights</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview-section" class="section active">
+                <div class="section-header">
+                    <h2>Business Overview</h2>
+                    <p class="section-description">Key performance indicators and business health metrics</p>
+                </div>
+
+                <div class="overview-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header"><h3>Total Revenue</h3><span class="kpi-icon">💰</span></div>
+                        <div class="kpi-value" id="totalRevenue">₹0</div>
+                        <div class="kpi-change positive" id="revenueChange">+0%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header"><h3>Net Profit</h3><span class="kpi-icon">📈</span></div>
+                        <div class="kpi-value" id="netProfit">₹0</div>
+                        <div class="kpi-change positive" id="profitChange">+0%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header"><h3>Cash Balance</h3><span class="kpi-icon">🏦</span></div>
+                        <div class="kpi-value" id="cashBalance">₹0</div>
+                        <div class="kpi-status healthy" id="cashStatus">Healthy</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header"><h3>Inventory Alerts</h3><span class="kpi-icon">⚠️</span></div>
+                        <div class="kpi-value" id="inventoryAlerts">0</div>
+                        <div class="kpi-status good" id="inventoryStatus">All Good</div>
+                    </div>
+                </div>
+
+                <div class="overview-charts">
+                    <div class="chart-container"><h3>Monthly Revenue Trend</h3><canvas id="revenueChart"></canvas></div>
+                    <div class="chart-container"><h3>Top Products by Revenue</h3><canvas id="productChart"></canvas></div>
+                </div>
+            </section>
+
+            <!-- Data Upload Section -->
+            <section id="upload-section" class="section">
+                <div class="section-header"><h2>Data Import</h2><p class="section-description">Upload your business data or use sample data to get started</p></div>
+                <div class="upload-container">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <span class="upload-icon">📁</span>
+                            <h3>Upload Your Business Data</h3>
+                            <p>Drag and drop CSV or Excel files here, or click to browse</p>
+                            <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" multiple style="display:none;">
+                            <button class="btn btn--primary" onclick="document.getElementById('fileInput').click()">Choose Files</button>
+                        </div>
+                    </div>
+                    <div class="sample-data-section">
+                        <h3>Or Try Our Sample Data</h3>
+                        <p>Experience the dashboard with realistic business data</p>
+                        <div class="sample-data-buttons"><button class="btn btn--secondary" id="loadSampleData">Load Sample Data</button></div>
+                    </div>
+                    <div class="file-status" id="fileStatus" style="display:none;"><h4>Upload Status</h4><div id="fileList"></div></div>
+                </div>
+            </section>
+
+            <!-- Sales, Cashflow, Inventory, Insights sections remain same as template but are included via app.js rendering -->
+            <section id="sales-section" class="section"><!-- Dynamic content --></section>
+            <section id="cashflow-section" class="section"></section>
+            <section id="inventory-section" class="section"></section>
+            <section id="insights-section" class="section"></section>
+        </main>
+    </div>
+
+    <!-- Premium Upgrade Modal -->
+    <div class="modal" id="upgradeModal"><div class="modal-content"><div class="modal-header"><h3>Upgrade to Premium</h3><button class="modal-close" id="closeModal">&times;</button></div><div class="modal-body"><p>Premium features coming soon.</p></div></div></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
